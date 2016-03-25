@@ -8,7 +8,7 @@ class Timer:
         self.elapsedEvent = observable.Observable()
         self._started = False
         self.period = kwargs.pop('period')
-        self.isAsync = kwargs.pop(async, True)
+        self.isAsync = kwargs.pop('async', True)
 
     def start(self):
         self._started = True
