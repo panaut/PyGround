@@ -2,10 +2,10 @@ from commonLog.rollingFileLog import RollingFileLog as Logging
 
 
 class CustomException(Exception):
-    def __init__(self, **kwargs):
-        self.message = kwargs.pop('message', None)
-        self.code = kwargs.pop('code', None)
-        self.originalException = kwargs.pop('exception', None)
+    def __init__(self, code, message=None, exception=None):
+        self.code = code                        # @code         exception code
+        self.message = message                  # @message      error message
+        self.originalException = exception      # @exception    inner exception
 
         if self.message is None and self.originalException is not None:
             self.message = self.originalException.args[0]

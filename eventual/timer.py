@@ -1,14 +1,18 @@
-from eventual import observable
+from eventual.observable import Observable
 import time
 import threading
 
 
-class Timer:
-    def __init__(self, **kwargs):
-        self.elapsedEvent = observable.Observable()
+class Timer(Observable):
+    def __init__(self, period, isAsync=True):
+        # @period           period between firing events
+        # @isAsync          flag indicating whether notifications are async
+
+        super().__init__()
+
         self._started = False
-        self.period = kwargs.pop('period')
-        self.isAsync = kwargs.pop('async', True)
+        self.period = period
+        self.isAsync = isAsync
 
     def start(self):
         self._started = True
@@ -24,6 +28,6 @@ class Timer:
             time.sleep(self.period)
             if self._started:
                 if self.isAsync:
-                    self.elapsedEvent.notifyObeserversAsync(self, None)
+                    self.notifyObeserversAsync(self, None)
                 else:
-                    self.elapsedEvent.notifyObeservers(self, None)
+                    self.notifyObeservers(self, None)
