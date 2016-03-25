@@ -1,4 +1,4 @@
-from rollingFileLog.rollingFileLog import RollingFileLog as Logging
+from commonLog.rollingFileLog import RollingFileLog as Logging
 
 
 class CustomException(Exception):
